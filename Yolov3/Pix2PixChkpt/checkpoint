@@ -1,0 +1,2 @@
+model_checkpoint_path: "/nfs/home/laurent/PycharmProjects/benchmark_nvidia/benchmark_nvidia/Pix2PixChkpt/model.ckpt"
+all_model_checkpoint_paths: "/nfs/home/laurent/PycharmProjects/benchmark_nvidia/benchmark_nvidia/Pix2PixChkpt/model.ckpt"

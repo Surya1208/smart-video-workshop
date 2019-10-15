@@ -22,39 +22,70 @@ from argparse import ArgumentParser
 import cv2
 import time
 import logging as log
+import numpy as np
+import io
 from openvino.inference_engine import IENetwork, IEPlugin
-from enum import Enum
-import collections
-
-
-
-class output_mode_type(Enum):
-    CLASSIFICATION_MODE=1
-    SSD_MODE=2
+from pathlib import Path
+sys.path.insert(0, str(Path().resolve().parent.parent))
+from demoTools.demoutils import *
+from IPython.display import display
 
 
 def build_argparser():
     parser = ArgumentParser()
-    parser.add_argument("-m", "--model", help="Path to an .xml file with a trained model.", required=True, type=str)
-    parser.add_argument("-i", "--input",
-                        help="Path to video file or image. 'cam' for capturing video stream from camera", required=True,
+    parser.add_argument('-m', '--model',
+                        help='Path to an .xml file with a trained model.',
+                        required=True,
                         type=str)
-    parser.add_argument("-l", "--cpu_extension",
-                        help="MKLDNN (CPU)-targeted custom layers.Absolute path to a shared library with the kernels "
-                             "impl.", type=str, default=None)
-    parser.add_argument("-pp", "--plugin_dir", help="Path to a plugin folder", type=str, default=None)
-    parser.add_argument("-d", "--device",
-                        help="Specify the target device to infer on; CPU, GPU, FPGA or MYRIAD is acceptable. Demo "
-                             "will look for a suitable plugin for device specified (CPU by default)", default="CPU",
+    parser.add_argument('-i', '--input',
+                        help='Path to video file or image. \'cam\' for capturing video stream from camera.',
+                        required=True,
                         type=str)
-    parser.add_argument("--labels", help="Labels mapping file", default=None, type=str)
-    parser.add_argument("-pt", "--prob_threshold", help="Probability threshold for detections filtering",
-                        default=0.5, type=float)
-    parser.add_argument("-fr", help="maximum frames to process", default=256, type=int)
-    parser.add_argument("-b", help="Batch size", default=1, type=int)
-    
+    parser.add_argument('-ce', '--cpu_extension',
+                        help='MKLDNN-targeted custom layers.'
+                             'Absolute path to a shared library with the kernel implementation.',
+                        type=str,
+                        default=None)
+    parser.add_argument('-pp', '--plugin_dir',
+                        help='Path to a plugin directory.',
+                        type=str,
+                        default=None)
+    parser.add_argument('-d', '--device',
+                        help='Specify the target device to infer on; CPU, GPU, FPGA, MYRIAD, or HDDL is acceptable.'
+                             'Demo will look for a suitable plugin for specified device (CPU by default).',
+                        default='CPU',
+                        type=str)
+    parser.add_argument('-nireq', '--number_infer_requests',
+                        help='Number of parallel inference requests (default is 2).',
+                        type=int,
+                        required=False,
+                        default=2)
+    parser.add_argument('-s', '--show',
+                        help='Show preview to the user.',
+                        action='store_true',
+                        required=False)
+    parser.add_argument('-l', '--labels',
+                        help='Labels mapping file.',
+                        default=None,
+                        type=str)
+    parser.add_argument('-pt', '--prob_threshold',
+                        help='Probability threshold for detection filtering.',
+                        default=0.5,
+                        type=float)
+    parser.add_argument('-o', '--output_dir',
+                        help='Location to store the results of the processing',
+                        default=None,
+                        required=True,
+                        type=str)
     return parser
 
+def processBoxes(frame_count, res, labels_map, prob_threshold, initial_w, initial_h, result_file):
+    for obj in res[0][0]:
+        dims = ""
+       # Draw only objects when probability more than specified threshold
+        if obj[2] > prob_threshold:
+           dims = "{frame_id} {xmin} {ymin} {xmax} {ymax} {class_id} {est} {time} \n".format(frame_id=frame_count, xmin=int(obj[3] * initial_w), ymin=int(obj[4] * initial_h), xmax=int(obj[5] * initial_w), ymax=int(obj[6] * initial_h), class_id=int(obj[1]), est=round(obj[2]*100, 1), time='N/A')
+           result_file.write(dims)
 
 def main():
     log.basicConfig(format="[ %(levelname)s ] %(message)s", level=log.INFO, stream=sys.stdout)
@@ -62,19 +93,13 @@ def main():
     model_xml = args.model
     model_bin = os.path.splitext(model_xml)[0] + ".bin"
 
-    preprocess_times = collections.deque()
-    infer_times = collections.deque()
-    postprocess_times = collections.deque()
-    
-    ROIfile=open("ROIs.txt","w"); # output stored here, view with ROIviewer
-    
     # Plugin initialization for specified device and load extensions library if specified
     log.info("Initializing plugin for {} device...".format(args.device))
     plugin = IEPlugin(device=args.device, plugin_dirs=args.plugin_dir)
     if args.cpu_extension and 'CPU' in args.device:
+        log.info("Loading plugins for {} device...".format(args.device))
         plugin.add_cpu_extension(args.cpu_extension)
 
-        
     # Read IR
     log.info("Reading IR...")
     net = IENetwork(model=model_xml, weights=model_bin)
@@ -85,152 +110,126 @@ def main():
         if len(not_supported_layers) != 0:
             log.error("Following layers are not supported by the plugin for specified device {}:\n {}".
                       format(plugin.device, ', '.join(not_supported_layers)))
-            log.error("Please try to specify cpu extensions library path in demo's command line parameters using -l "
+            log.error("Please try to specify cpu extensions library path in sample's command line parameters using -l "
                       "or --cpu_extension command line argument")
             sys.exit(1)
+    assert len(net.inputs.keys()) == 1, "Sample supports only single input topologies"
+    assert len(net.outputs) == 1, "Sample supports only single output topologies"
 
-    #Set Batch Size
-    net.batch_size = args.b
-    batchSize = net.batch_size
-    frameLimit = args.fr
-    assert len(net.inputs.keys()) == 1, "Demo supports only single input topologies"
-    assert len(net.outputs) == 1, "Demo supports only single output topologies"
     input_blob = next(iter(net.inputs))
     out_blob = next(iter(net.outputs))
-    log.info("Loading IR to the plugin...")
-    exec_net = plugin.load(network=net, num_requests=2)
-       
-    # Read and pre-process input image
-    n, c, h, w = net.inputs[input_blob].shape
-    output_dims=net.outputs[out_blob].shape
-    infer_width=w;
-    infer_height=h;
-    num_channels=c;
-    channel_size=infer_width*infer_height
-    full_image_size=channel_size*num_channels
-    
-    print("inputdims=",w,h,c,n)
-    print("outputdims=",output_dims[3],output_dims[2],output_dims[1],output_dims[0])
-    if int(output_dims[3])>1 :
-        print("SSD Mode")
-        output_mode=output_mode_type.SSD_MODE
-    else:
-        print("Single Classification Mode")
-        output_mode=CLASSIFICATION_MODE
-        output_data_size=int(output_dims[2])*int(output_dims[1])*int(output_dims[0])
-    del net
+
     if args.input == 'cam':
         input_stream = 0
+        out_file_name = 'cam'
     else:
         input_stream = args.input
         assert os.path.isfile(args.input), "Specified input file doesn't exist"
+        out_file_name = os.path.splitext(os.path.basename(args.input))[0]
+
+    log.info("Loading IR to the plugin...")
+    exec_net = plugin.load(network=net, num_requests=args.number_infer_requests)
+ 
+
+    log.info("Starting inference in async mode, {} requests in parallel...".format(args.number_infer_requests))
+    result_file = open(os.path.join(args.output_dir, 'output.txt'), "w")
+    pre_infer_file = os.path.join(args.output_dir, 'pre_progress.txt')
+    infer_file = os.path.join(args.output_dir, 'i_progress.txt')
+    processed_vid = '/tmp/processed_vid.bin'
+
+
+    # Read and pre-process input image
+    if isinstance(net.inputs[input_blob], list):
+        n, c, h, w = net.inputs[input_blob]
+    else:
+        n, c, h, w = net.inputs[input_blob].shape
+    del net
+
+
+    cap = cv2.VideoCapture(input_stream)
+    video_len = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    if video_len < args.number_infer_requests:
+        args.number_infer_requests = video_len 
+    #Pre inference processing, read mp4 frame by frame, process using openCV and write to binary file
+    width = int(cap.get(3))
+    height = int(cap.get(4))
+    CHUNKSIZE = n*c*w*h
+    id_ = 0
+    with open(processed_vid, 'w+b') as f:
+        time_start = time.time()
+        while cap.isOpened():
+            ret, next_frame = cap.read()
+            if not ret:
+                break
+            in_frame = cv2.resize(next_frame, (w, h))
+            in_frame = in_frame.transpose((2, 0, 1))  # Change data layout from HWC to CHW
+            in_frame = in_frame.reshape((n, c, h, w))
+            bin_frame = bytearray(in_frame) 
+            f.write(bin_frame)
+            id_ += 1
+            if id_%10 == 0: 
+                progressUpdate(pre_infer_file, time.time()-time_start, id_, video_len) 
+
     if args.labels:
         with open(args.labels, 'r') as f:
             labels_map = [x.strip() for x in f]
     else:
         labels_map = None
-
-    cap = cv2.VideoCapture(input_stream)
-
-    cur_request_id = 0
-    next_request_id = 1
-
-    is_async_mode =True
-    if (is_async_mode == True):
-        log.info("Starting inference in async mode...")   
-    else :
-            log.info("Starting inference in sync mode...")
-
-    render_time = 0
-
-    framenum = 0
-    process_more_frames=True
-    frames_in_output=batchSize
     
-    while process_more_frames:
-        time1 = time.time()
-        for mb in range(0 , batchSize):
-            ret, frame = cap.read()
-            if not ret or (framenum >= frameLimit):
-                process_more_frames=False
-                frames_in_output=mb
+    current_inference = 0
+    previous_inference = 1 - args.number_infer_requests
+    infer_requests = exec_net.requests
+    frame_count = 0
+
+    try:
+        infer_time_start = time.time()
+        with open(processed_vid, "rb") as data:
+            while frame_count < video_len:
+                # Read next frame from input stream if available and submit it for inference 
+                byte = data.read(CHUNKSIZE)
+                if not byte == b"":
+                    deserialized_bytes = np.frombuffer(byte, dtype=np.uint8)
+                    in_frame = np.reshape(deserialized_bytes, newshape=(n, c, h, w))
+                    exec_net.start_async(request_id=current_inference, inputs={input_blob: in_frame})
                 
-            if (not process_more_frames):
-                break
+                # Retrieve the output of an earlier inference request
+                if previous_inference >= 0:
+                    status = infer_requests[previous_inference].wait()
+                    if status is not 0:
+                        raise Exception("Infer request not completed successfully")
+                    # Parse inference results
+                    res = infer_requests[previous_inference].outputs[out_blob]
+                    processBoxes(frame_count, res, labels_map, args.prob_threshold, width, height, result_file)
+                    frame_count += 1
 
-            # convert image to blob
-            # Fill input tensor with planes. First b channel, then g and r channels
-            in_frame = cv2.resize(frame, (w, h))
-            in_frame = in_frame.transpose((2, 0, 1))  # Change data layout from HWC to CHW
-            
-			
-        time2 = time.time()
-        diffPreProcess = time2 - time1
-        if process_more_frames:
-            preprocess_times.append(diffPreProcess*1000)
-            
-        # Main sync point:
-        # in the truly Async mode we start the NEXT infer request, while waiting for the CURRENT to complete
-        # in the regular mode we start the CURRENT request and immediately wait for it's completion
-            inf_start = time.time()
-            if is_async_mode:
-                exec_net.start_async(request_id=next_request_id, inputs={input_blob: in_frame})
-            else:
-                exec_net.start_async(request_id=cur_request_id, inputs={input_blob: in_frame})
-            if exec_net.requests[cur_request_id].wait(-1) == 0:
-                inf_end = time.time()
-                det_time = inf_end - inf_start
-                infer_times.append(det_time*1000)
-                time1 = time.time()
-                
-                for mb in range(0 , batchSize):
-                    if (framenum >= frameLimit):
-                        process_more_frames=False;
-                        break;
+                # Write data to progress tracker
+                if frame_count % 10 == 0: 
+                    progressUpdate(infer_file, time.time()-infer_time_start, frame_count+1, video_len+1) 
 
-            # Parse detection results of the current request
-                    res = exec_net.requests[cur_request_id].outputs[out_blob]
-                    for obj in res[0][0]:
-                # Write into ROIs.txt only objects when probability more than specified threshold
-            	        if obj[2] > args.prob_threshold:
-                            confidence=obj[2]
-                            locallabel = obj[1] - 1
-                            print(str(0),str(framenum),str(locallabel),str(confidence),str(obj[3]),str(obj[4]),str(obj[5]),str(obj[6]), file=ROIfile)
+                # Increment counter for the inference queue and roll them over if necessary 
+                current_inference += 1
+                if current_inference >= args.number_infer_requests:
+                    current_inference = 0
 
-        
-                    sys.stdout.write("\rframenum:"+str(framenum + 1))
-                    sys.stdout.flush()
-                    render_start = time.time()
-                    framenum = framenum+1  
-                    
-                time2 = time.time()
-                diffPostProcess = time2 - time1
-                postprocess_times.append(diffPostProcess*1000)
+                previous_inference += 1
+                if previous_inference >= args.number_infer_requests:
+                    previous_inference = 0
 
-            if is_async_mode:
-                cur_request_id, next_request_id = next_request_id, cur_request_id
+        # End while loop
+        total_time = time.time() - infer_time_start
+        with open(os.path.join(args.output_dir, 'stats.txt'), 'w') as f:
+                f.write('{:.3g} \n'.format(total_time))
+                f.write('{} \n'.format(frame_count))
 
-            
-    print("\n")
-    preprocesstime=0
-    inferencetime=0
-    postprocesstime=0
-    
-    for obj in preprocess_times:
-         preprocesstime+=obj
-    for obj in infer_times:
-        inferencetime+=obj
-    for obj in postprocess_times:
-        postprocesstime+=obj
+        cap.release()
+        result_file.close()
 
-        
-    print("Preprocess: {:.2f} ms/frame".format(preprocesstime/(len(preprocess_times)*batchSize)))
-    print("Inference: {:.2f} ms/frame ".format(inferencetime/(len(infer_times)*batchSize)))
-    print("Postprocess: {:.2f} ms/frame".format(postprocesstime/(len(postprocess_times)*batchSize)))
-
-    del exec_net
-    del plugin
+    finally:
+        log.info("Processing done...")
+        del exec_net
+        del plugin
 
 
 if __name__ == '__main__':
     sys.exit(main() or 0)
+

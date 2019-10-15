@@ -1,0 +1,3260 @@
+<?xml version="1.0" ?>
+<net batch="1" name="inception_v1_frozen" version="5">
+	<layers>
+		<layer id="0" name="input" precision="FP32" type="Input">
+			<output>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="Mul_/Fused_Mul_/FusedScaleShift_" precision="FP32" type="ScaleShift">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="0" size="12"/>
+				<biases offset="12" size="12"/>
+			</blobs>
+		</layer>
+		<layer id="2" name="InceptionV1/InceptionV1/Conv2d_1a_7x7/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="7,7" output="64" pads_begin="2,2" pads_end="3,3" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="24" size="37632"/>
+				<biases offset="37656" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="3" name="InceptionV1/InceptionV1/Conv2d_1a_7x7/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="4" name="InceptionV1/InceptionV1/MaxPool_2a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="0,0" pads_end="1,1" pool-method="max" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="5" name="InceptionV1/InceptionV1/Conv2d_2b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="37912" size="16384"/>
+				<biases offset="54296" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="6" name="InceptionV1/InceptionV1/Conv2d_2b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="7" name="InceptionV1/InceptionV1/Conv2d_2c_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="192" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="54552" size="442368"/>
+				<biases offset="496920" size="768"/>
+			</blobs>
+		</layer>
+		<layer id="8" name="InceptionV1/InceptionV1/Conv2d_2c_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="9" name="InceptionV1/InceptionV1/MaxPool_3a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="0,0" pads_end="1,1" pool-method="max" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="10" name="InceptionV1/InceptionV1/Mixed_3b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="497688" size="49152"/>
+				<biases offset="546840" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="11" name="InceptionV1/InceptionV1/Mixed_3b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="12" name="InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="547096" size="73728"/>
+				<biases offset="620824" size="384"/>
+			</blobs>
+		</layer>
+		<layer id="13" name="InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="14" name="InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="621208" size="442368"/>
+				<biases offset="1063576" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="15" name="InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="16" name="InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="16" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1064088" size="12288"/>
+				<biases offset="1076376" size="64"/>
+			</blobs>
+		</layer>
+		<layer id="17" name="InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="18" name="InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="32" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1076440" size="18432"/>
+				<biases offset="1094872" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="19" name="InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="20" name="InceptionV1/InceptionV1/Mixed_3b/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="21" name="InceptionV1/InceptionV1/Mixed_3b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="32" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1095000" size="24576"/>
+				<biases offset="1119576" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="22" name="InceptionV1/InceptionV1/Mixed_3b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="23" name="InceptionV1/InceptionV1/Mixed_3b/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="24" name="InceptionV1/InceptionV1/Mixed_3c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1119704" size="131072"/>
+				<biases offset="1250776" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="25" name="InceptionV1/InceptionV1/Mixed_3c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="26" name="InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1251288" size="131072"/>
+				<biases offset="1382360" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="27" name="InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="28" name="InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="192" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1382872" size="884736"/>
+				<biases offset="2267608" size="768"/>
+			</blobs>
+		</layer>
+		<layer id="29" name="InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="30" name="InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="32" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2268376" size="32768"/>
+				<biases offset="2301144" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="31" name="InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="32" name="InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2301272" size="110592"/>
+				<biases offset="2411864" size="384"/>
+			</blobs>
+		</layer>
+		<layer id="33" name="InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="34" name="InceptionV1/InceptionV1/Mixed_3c/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="35" name="InceptionV1/InceptionV1/Mixed_3c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2412248" size="65536"/>
+				<biases offset="2477784" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="36" name="InceptionV1/InceptionV1/Mixed_3c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="37" name="InceptionV1/InceptionV1/Mixed_3c/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="38" name="InceptionV1/InceptionV1/MaxPool_4a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="0,0" pads_end="1,1" pool-method="max" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="39" name="InceptionV1/InceptionV1/Mixed_4b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="192" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2478040" size="368640"/>
+				<biases offset="2846680" size="768"/>
+			</blobs>
+		</layer>
+		<layer id="40" name="InceptionV1/InceptionV1/Mixed_4b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="41" name="InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2847448" size="184320"/>
+				<biases offset="3031768" size="384"/>
+			</blobs>
+		</layer>
+		<layer id="42" name="InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="43" name="InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="208" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>96</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>208</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3032152" size="718848"/>
+				<biases offset="3751000" size="832"/>
+			</blobs>
+		</layer>
+		<layer id="44" name="InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>208</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>208</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="45" name="InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="16" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3751832" size="30720"/>
+				<biases offset="3782552" size="64"/>
+			</blobs>
+		</layer>
+		<layer id="46" name="InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="47" name="InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="48" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3782616" size="27648"/>
+				<biases offset="3810264" size="192"/>
+			</blobs>
+		</layer>
+		<layer id="48" name="InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="49" name="InceptionV1/InceptionV1/Mixed_4b/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="50" name="InceptionV1/InceptionV1/Mixed_4b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>480</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3810456" size="122880"/>
+				<biases offset="3933336" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="51" name="InceptionV1/InceptionV1/Mixed_4b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="52" name="InceptionV1/InceptionV1/Mixed_4b/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>208</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="53" name="InceptionV1/InceptionV1/Mixed_4c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="160" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3933592" size="327680"/>
+				<biases offset="4261272" size="640"/>
+			</blobs>
+		</layer>
+		<layer id="54" name="InceptionV1/InceptionV1/Mixed_4c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="55" name="InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="112" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="4261912" size="229376"/>
+				<biases offset="4491288" size="448"/>
+			</blobs>
+		</layer>
+		<layer id="56" name="InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="57" name="InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="224" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>224</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="4491736" size="903168"/>
+				<biases offset="5394904" size="896"/>
+			</blobs>
+		</layer>
+		<layer id="58" name="InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>224</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>224</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="59" name="InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="5395800" size="49152"/>
+				<biases offset="5444952" size="96"/>
+			</blobs>
+		</layer>
+		<layer id="60" name="InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="61" name="InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="64" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="5445048" size="55296"/>
+				<biases offset="5500344" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="62" name="InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="63" name="InceptionV1/InceptionV1/Mixed_4c/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="64" name="InceptionV1/InceptionV1/Mixed_4c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="5500600" size="131072"/>
+				<biases offset="5631672" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="65" name="InceptionV1/InceptionV1/Mixed_4c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="66" name="InceptionV1/InceptionV1/Mixed_4c/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>224</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="67" name="InceptionV1/InceptionV1/Mixed_4d/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="5631928" size="262144"/>
+				<biases offset="5894072" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="68" name="InceptionV1/InceptionV1/Mixed_4d/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="69" name="InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="5894584" size="262144"/>
+				<biases offset="6156728" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="70" name="InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="71" name="InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="256" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="6157240" size="1179648"/>
+				<biases offset="7336888" size="1024"/>
+			</blobs>
+		</layer>
+		<layer id="72" name="InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="73" name="InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="7337912" size="49152"/>
+				<biases offset="7387064" size="96"/>
+			</blobs>
+		</layer>
+		<layer id="74" name="InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="75" name="InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="64" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="7387160" size="55296"/>
+				<biases offset="7442456" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="76" name="InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="77" name="InceptionV1/InceptionV1/Mixed_4d/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="78" name="InceptionV1/InceptionV1/Mixed_4d/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="7442712" size="131072"/>
+				<biases offset="7573784" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="79" name="InceptionV1/InceptionV1/Mixed_4d/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="80" name="InceptionV1/InceptionV1/Mixed_4d/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="81" name="InceptionV1/InceptionV1/Mixed_4e/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="112" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="7574040" size="229376"/>
+				<biases offset="7803416" size="448"/>
+			</blobs>
+		</layer>
+		<layer id="82" name="InceptionV1/InceptionV1/Mixed_4e/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="83" name="InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="144" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>144</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="7803864" size="294912"/>
+				<biases offset="8098776" size="576"/>
+			</blobs>
+		</layer>
+		<layer id="84" name="InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>144</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>144</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="85" name="InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="288" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>144</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>288</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="8099352" size="1492992"/>
+				<biases offset="9592344" size="1152"/>
+			</blobs>
+		</layer>
+		<layer id="86" name="InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>288</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>288</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="87" name="InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="32" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="9593496" size="65536"/>
+				<biases offset="9659032" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="88" name="InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="89" name="InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="64" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="9659160" size="73728"/>
+				<biases offset="9732888" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="90" name="InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="91" name="InceptionV1/InceptionV1/Mixed_4e/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="92" name="InceptionV1/InceptionV1/Mixed_4e/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="9733144" size="131072"/>
+				<biases offset="9864216" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="93" name="InceptionV1/InceptionV1/Mixed_4e/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="94" name="InceptionV1/InceptionV1/Mixed_4e/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>112</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>288</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>528</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="95" name="InceptionV1/InceptionV1/Mixed_4f/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="256" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>528</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="9864472" size="540672"/>
+				<biases offset="10405144" size="1024"/>
+			</blobs>
+		</layer>
+		<layer id="96" name="InceptionV1/InceptionV1/Mixed_4f/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="97" name="InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="160" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>528</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="10406168" size="337920"/>
+				<biases offset="10744088" size="640"/>
+			</blobs>
+		</layer>
+		<layer id="98" name="InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="99" name="InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="320" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="10744728" size="1843200"/>
+				<biases offset="12587928" size="1280"/>
+			</blobs>
+		</layer>
+		<layer id="100" name="InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="101" name="InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="32" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>528</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="12589208" size="67584"/>
+				<biases offset="12656792" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="102" name="InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="103" name="InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="12656920" size="147456"/>
+				<biases offset="12804376" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="104" name="InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="105" name="InceptionV1/InceptionV1/Mixed_4f/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>528</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>528</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="106" name="InceptionV1/InceptionV1/Mixed_4f/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>528</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="12804888" size="270336"/>
+				<biases offset="13075224" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="107" name="InceptionV1/InceptionV1/Mixed_4f/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="108" name="InceptionV1/InceptionV1/Mixed_4f/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="109" name="InceptionV1/InceptionV1/MaxPool_5a_2x2/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="2,2" pads_begin="0,0" pads_end="0,0" pool-method="max" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="110" name="InceptionV1/InceptionV1/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="256" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="13075736" size="851968"/>
+				<biases offset="13927704" size="1024"/>
+			</blobs>
+		</layer>
+		<layer id="111" name="InceptionV1/InceptionV1/Mixed_5b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="112" name="InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="160" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="13928728" size="532480"/>
+				<biases offset="14461208" size="640"/>
+			</blobs>
+		</layer>
+		<layer id="113" name="InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="114" name="InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="320" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>160</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="14461848" size="1843200"/>
+				<biases offset="16305048" size="1280"/>
+			</blobs>
+		</layer>
+		<layer id="115" name="InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="116" name="InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="32" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="16306328" size="106496"/>
+				<biases offset="16412824" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="117" name="InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="118" name="InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="16412952" size="147456"/>
+				<biases offset="16560408" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="119" name="InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="120" name="InceptionV1/InceptionV1/Mixed_5b/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="121" name="InceptionV1/InceptionV1/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="16560920" size="425984"/>
+				<biases offset="16986904" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="122" name="InceptionV1/InceptionV1/Mixed_5b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="123" name="InceptionV1/InceptionV1/Mixed_5b/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>320</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="124" name="InceptionV1/InceptionV1/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="384" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="16987416" size="1277952"/>
+				<biases offset="18265368" size="1536"/>
+			</blobs>
+		</layer>
+		<layer id="125" name="InceptionV1/InceptionV1/Mixed_5c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="126" name="InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="192" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="18266904" size="638976"/>
+				<biases offset="18905880" size="768"/>
+			</blobs>
+		</layer>
+		<layer id="127" name="InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="128" name="InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="384" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>192</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="18906648" size="2654208"/>
+				<biases offset="21560856" size="1536"/>
+			</blobs>
+		</layer>
+		<layer id="129" name="InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="130" name="InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="48" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="21562392" size="159744"/>
+				<biases offset="21722136" size="192"/>
+			</blobs>
+		</layer>
+		<layer id="131" name="InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="132" name="InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="21722328" size="221184"/>
+				<biases offset="21943512" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="133" name="InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="134" name="InceptionV1/InceptionV1/Mixed_5c/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="135" name="InceptionV1/InceptionV1/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>832</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="21944024" size="425984"/>
+				<biases offset="22370008" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="136" name="InceptionV1/InceptionV1/Mixed_5c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="137" name="InceptionV1/InceptionV1/Mixed_5c/concat" precision="FP32" type="Concat">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>384</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="4">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="138" name="InceptionV1/Logits/AvgPool_0a_7x7/AvgPool" precision="FP32" type="Pooling">
+			<data auto_pad="valid" exclude-pad="true" kernel="7,7" pads_begin="0,0" pads_end="0,0" pool-method="avg" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="139" name="InceptionV1/Logits/Conv2d_0c_1x1/Conv2D" precision="FP32" type="Convolution">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="1001" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>1001</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="22370520" size="4100096"/>
+				<biases offset="26470616" size="4004"/>
+			</blobs>
+		</layer>
+		<layer id="140" name="InceptionV1/Logits/Conv2d_0c_1x1/Conv2D/Permute_" precision="FP32" type="Permute">
+			<data order="0,2,3,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1001</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1001</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="141" name="InceptionV1/Logits/Predictions/Reshape/shape/Output_0/Data__const" precision="FP32" type="Const">
+			<output>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="26474620" size="8"/>
+			</blobs>
+		</layer>
+		<layer id="142" name="InceptionV1/Logits/Predictions/Reshape" precision="FP32" type="Reshape">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1001</dim>
+				</port>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>1</dim>
+					<dim>1001</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="143" name="InceptionV1/Logits/Predictions/Softmax" precision="FP32" type="SoftMax">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1001</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1001</dim>
+				</port>
+			</output>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="1" to-port="0"/>
+		<edge from-layer="1" from-port="3" to-layer="2" to-port="0"/>
+		<edge from-layer="2" from-port="3" to-layer="3" to-port="0"/>
+		<edge from-layer="3" from-port="1" to-layer="4" to-port="0"/>
+		<edge from-layer="4" from-port="1" to-layer="5" to-port="0"/>
+		<edge from-layer="5" from-port="3" to-layer="6" to-port="0"/>
+		<edge from-layer="6" from-port="1" to-layer="7" to-port="0"/>
+		<edge from-layer="7" from-port="3" to-layer="8" to-port="0"/>
+		<edge from-layer="8" from-port="1" to-layer="9" to-port="0"/>
+		<edge from-layer="9" from-port="1" to-layer="10" to-port="0"/>
+		<edge from-layer="10" from-port="3" to-layer="11" to-port="0"/>
+		<edge from-layer="9" from-port="1" to-layer="12" to-port="0"/>
+		<edge from-layer="12" from-port="3" to-layer="13" to-port="0"/>
+		<edge from-layer="13" from-port="1" to-layer="14" to-port="0"/>
+		<edge from-layer="14" from-port="3" to-layer="15" to-port="0"/>
+		<edge from-layer="9" from-port="1" to-layer="16" to-port="0"/>
+		<edge from-layer="16" from-port="3" to-layer="17" to-port="0"/>
+		<edge from-layer="17" from-port="1" to-layer="18" to-port="0"/>
+		<edge from-layer="18" from-port="3" to-layer="19" to-port="0"/>
+		<edge from-layer="9" from-port="1" to-layer="20" to-port="0"/>
+		<edge from-layer="20" from-port="1" to-layer="21" to-port="0"/>
+		<edge from-layer="21" from-port="3" to-layer="22" to-port="0"/>
+		<edge from-layer="11" from-port="1" to-layer="23" to-port="0"/>
+		<edge from-layer="15" from-port="1" to-layer="23" to-port="1"/>
+		<edge from-layer="19" from-port="1" to-layer="23" to-port="2"/>
+		<edge from-layer="22" from-port="1" to-layer="23" to-port="3"/>
+		<edge from-layer="23" from-port="4" to-layer="24" to-port="0"/>
+		<edge from-layer="24" from-port="3" to-layer="25" to-port="0"/>
+		<edge from-layer="23" from-port="4" to-layer="26" to-port="0"/>
+		<edge from-layer="26" from-port="3" to-layer="27" to-port="0"/>
+		<edge from-layer="27" from-port="1" to-layer="28" to-port="0"/>
+		<edge from-layer="28" from-port="3" to-layer="29" to-port="0"/>
+		<edge from-layer="23" from-port="4" to-layer="30" to-port="0"/>
+		<edge from-layer="30" from-port="3" to-layer="31" to-port="0"/>
+		<edge from-layer="31" from-port="1" to-layer="32" to-port="0"/>
+		<edge from-layer="32" from-port="3" to-layer="33" to-port="0"/>
+		<edge from-layer="23" from-port="4" to-layer="34" to-port="0"/>
+		<edge from-layer="34" from-port="1" to-layer="35" to-port="0"/>
+		<edge from-layer="35" from-port="3" to-layer="36" to-port="0"/>
+		<edge from-layer="25" from-port="1" to-layer="37" to-port="0"/>
+		<edge from-layer="29" from-port="1" to-layer="37" to-port="1"/>
+		<edge from-layer="33" from-port="1" to-layer="37" to-port="2"/>
+		<edge from-layer="36" from-port="1" to-layer="37" to-port="3"/>
+		<edge from-layer="37" from-port="4" to-layer="38" to-port="0"/>
+		<edge from-layer="38" from-port="1" to-layer="39" to-port="0"/>
+		<edge from-layer="39" from-port="3" to-layer="40" to-port="0"/>
+		<edge from-layer="38" from-port="1" to-layer="41" to-port="0"/>
+		<edge from-layer="41" from-port="3" to-layer="42" to-port="0"/>
+		<edge from-layer="42" from-port="1" to-layer="43" to-port="0"/>
+		<edge from-layer="43" from-port="3" to-layer="44" to-port="0"/>
+		<edge from-layer="38" from-port="1" to-layer="45" to-port="0"/>
+		<edge from-layer="45" from-port="3" to-layer="46" to-port="0"/>
+		<edge from-layer="46" from-port="1" to-layer="47" to-port="0"/>
+		<edge from-layer="47" from-port="3" to-layer="48" to-port="0"/>
+		<edge from-layer="38" from-port="1" to-layer="49" to-port="0"/>
+		<edge from-layer="49" from-port="1" to-layer="50" to-port="0"/>
+		<edge from-layer="50" from-port="3" to-layer="51" to-port="0"/>
+		<edge from-layer="40" from-port="1" to-layer="52" to-port="0"/>
+		<edge from-layer="44" from-port="1" to-layer="52" to-port="1"/>
+		<edge from-layer="48" from-port="1" to-layer="52" to-port="2"/>
+		<edge from-layer="51" from-port="1" to-layer="52" to-port="3"/>
+		<edge from-layer="52" from-port="4" to-layer="53" to-port="0"/>
+		<edge from-layer="53" from-port="3" to-layer="54" to-port="0"/>
+		<edge from-layer="52" from-port="4" to-layer="55" to-port="0"/>
+		<edge from-layer="55" from-port="3" to-layer="56" to-port="0"/>
+		<edge from-layer="56" from-port="1" to-layer="57" to-port="0"/>
+		<edge from-layer="57" from-port="3" to-layer="58" to-port="0"/>
+		<edge from-layer="52" from-port="4" to-layer="59" to-port="0"/>
+		<edge from-layer="59" from-port="3" to-layer="60" to-port="0"/>
+		<edge from-layer="60" from-port="1" to-layer="61" to-port="0"/>
+		<edge from-layer="61" from-port="3" to-layer="62" to-port="0"/>
+		<edge from-layer="52" from-port="4" to-layer="63" to-port="0"/>
+		<edge from-layer="63" from-port="1" to-layer="64" to-port="0"/>
+		<edge from-layer="64" from-port="3" to-layer="65" to-port="0"/>
+		<edge from-layer="54" from-port="1" to-layer="66" to-port="0"/>
+		<edge from-layer="58" from-port="1" to-layer="66" to-port="1"/>
+		<edge from-layer="62" from-port="1" to-layer="66" to-port="2"/>
+		<edge from-layer="65" from-port="1" to-layer="66" to-port="3"/>
+		<edge from-layer="66" from-port="4" to-layer="67" to-port="0"/>
+		<edge from-layer="67" from-port="3" to-layer="68" to-port="0"/>
+		<edge from-layer="66" from-port="4" to-layer="69" to-port="0"/>
+		<edge from-layer="69" from-port="3" to-layer="70" to-port="0"/>
+		<edge from-layer="70" from-port="1" to-layer="71" to-port="0"/>
+		<edge from-layer="71" from-port="3" to-layer="72" to-port="0"/>
+		<edge from-layer="66" from-port="4" to-layer="73" to-port="0"/>
+		<edge from-layer="73" from-port="3" to-layer="74" to-port="0"/>
+		<edge from-layer="74" from-port="1" to-layer="75" to-port="0"/>
+		<edge from-layer="75" from-port="3" to-layer="76" to-port="0"/>
+		<edge from-layer="66" from-port="4" to-layer="77" to-port="0"/>
+		<edge from-layer="77" from-port="1" to-layer="78" to-port="0"/>
+		<edge from-layer="78" from-port="3" to-layer="79" to-port="0"/>
+		<edge from-layer="68" from-port="1" to-layer="80" to-port="0"/>
+		<edge from-layer="72" from-port="1" to-layer="80" to-port="1"/>
+		<edge from-layer="76" from-port="1" to-layer="80" to-port="2"/>
+		<edge from-layer="79" from-port="1" to-layer="80" to-port="3"/>
+		<edge from-layer="80" from-port="4" to-layer="81" to-port="0"/>
+		<edge from-layer="81" from-port="3" to-layer="82" to-port="0"/>
+		<edge from-layer="80" from-port="4" to-layer="83" to-port="0"/>
+		<edge from-layer="83" from-port="3" to-layer="84" to-port="0"/>
+		<edge from-layer="84" from-port="1" to-layer="85" to-port="0"/>
+		<edge from-layer="85" from-port="3" to-layer="86" to-port="0"/>
+		<edge from-layer="80" from-port="4" to-layer="87" to-port="0"/>
+		<edge from-layer="87" from-port="3" to-layer="88" to-port="0"/>
+		<edge from-layer="88" from-port="1" to-layer="89" to-port="0"/>
+		<edge from-layer="89" from-port="3" to-layer="90" to-port="0"/>
+		<edge from-layer="80" from-port="4" to-layer="91" to-port="0"/>
+		<edge from-layer="91" from-port="1" to-layer="92" to-port="0"/>
+		<edge from-layer="92" from-port="3" to-layer="93" to-port="0"/>
+		<edge from-layer="82" from-port="1" to-layer="94" to-port="0"/>
+		<edge from-layer="86" from-port="1" to-layer="94" to-port="1"/>
+		<edge from-layer="90" from-port="1" to-layer="94" to-port="2"/>
+		<edge from-layer="93" from-port="1" to-layer="94" to-port="3"/>
+		<edge from-layer="94" from-port="4" to-layer="95" to-port="0"/>
+		<edge from-layer="95" from-port="3" to-layer="96" to-port="0"/>
+		<edge from-layer="94" from-port="4" to-layer="97" to-port="0"/>
+		<edge from-layer="97" from-port="3" to-layer="98" to-port="0"/>
+		<edge from-layer="98" from-port="1" to-layer="99" to-port="0"/>
+		<edge from-layer="99" from-port="3" to-layer="100" to-port="0"/>
+		<edge from-layer="94" from-port="4" to-layer="101" to-port="0"/>
+		<edge from-layer="101" from-port="3" to-layer="102" to-port="0"/>
+		<edge from-layer="102" from-port="1" to-layer="103" to-port="0"/>
+		<edge from-layer="103" from-port="3" to-layer="104" to-port="0"/>
+		<edge from-layer="94" from-port="4" to-layer="105" to-port="0"/>
+		<edge from-layer="105" from-port="1" to-layer="106" to-port="0"/>
+		<edge from-layer="106" from-port="3" to-layer="107" to-port="0"/>
+		<edge from-layer="96" from-port="1" to-layer="108" to-port="0"/>
+		<edge from-layer="100" from-port="1" to-layer="108" to-port="1"/>
+		<edge from-layer="104" from-port="1" to-layer="108" to-port="2"/>
+		<edge from-layer="107" from-port="1" to-layer="108" to-port="3"/>
+		<edge from-layer="108" from-port="4" to-layer="109" to-port="0"/>
+		<edge from-layer="109" from-port="1" to-layer="110" to-port="0"/>
+		<edge from-layer="110" from-port="3" to-layer="111" to-port="0"/>
+		<edge from-layer="109" from-port="1" to-layer="112" to-port="0"/>
+		<edge from-layer="112" from-port="3" to-layer="113" to-port="0"/>
+		<edge from-layer="113" from-port="1" to-layer="114" to-port="0"/>
+		<edge from-layer="114" from-port="3" to-layer="115" to-port="0"/>
+		<edge from-layer="109" from-port="1" to-layer="116" to-port="0"/>
+		<edge from-layer="116" from-port="3" to-layer="117" to-port="0"/>
+		<edge from-layer="117" from-port="1" to-layer="118" to-port="0"/>
+		<edge from-layer="118" from-port="3" to-layer="119" to-port="0"/>
+		<edge from-layer="109" from-port="1" to-layer="120" to-port="0"/>
+		<edge from-layer="120" from-port="1" to-layer="121" to-port="0"/>
+		<edge from-layer="121" from-port="3" to-layer="122" to-port="0"/>
+		<edge from-layer="111" from-port="1" to-layer="123" to-port="0"/>
+		<edge from-layer="115" from-port="1" to-layer="123" to-port="1"/>
+		<edge from-layer="119" from-port="1" to-layer="123" to-port="2"/>
+		<edge from-layer="122" from-port="1" to-layer="123" to-port="3"/>
+		<edge from-layer="123" from-port="4" to-layer="124" to-port="0"/>
+		<edge from-layer="124" from-port="3" to-layer="125" to-port="0"/>
+		<edge from-layer="123" from-port="4" to-layer="126" to-port="0"/>
+		<edge from-layer="126" from-port="3" to-layer="127" to-port="0"/>
+		<edge from-layer="127" from-port="1" to-layer="128" to-port="0"/>
+		<edge from-layer="128" from-port="3" to-layer="129" to-port="0"/>
+		<edge from-layer="123" from-port="4" to-layer="130" to-port="0"/>
+		<edge from-layer="130" from-port="3" to-layer="131" to-port="0"/>
+		<edge from-layer="131" from-port="1" to-layer="132" to-port="0"/>
+		<edge from-layer="132" from-port="3" to-layer="133" to-port="0"/>
+		<edge from-layer="123" from-port="4" to-layer="134" to-port="0"/>
+		<edge from-layer="134" from-port="1" to-layer="135" to-port="0"/>
+		<edge from-layer="135" from-port="3" to-layer="136" to-port="0"/>
+		<edge from-layer="125" from-port="1" to-layer="137" to-port="0"/>
+		<edge from-layer="129" from-port="1" to-layer="137" to-port="1"/>
+		<edge from-layer="133" from-port="1" to-layer="137" to-port="2"/>
+		<edge from-layer="136" from-port="1" to-layer="137" to-port="3"/>
+		<edge from-layer="137" from-port="4" to-layer="138" to-port="0"/>
+		<edge from-layer="138" from-port="1" to-layer="139" to-port="0"/>
+		<edge from-layer="139" from-port="3" to-layer="140" to-port="0"/>
+		<edge from-layer="140" from-port="1" to-layer="142" to-port="0"/>
+		<edge from-layer="141" from-port="1" to-layer="142" to-port="1"/>
+		<edge from-layer="142" from-port="2" to-layer="143" to-port="0"/>
+	</edges>
+	<meta_data>
+		<MO_version value="2019.1.0-341-gc9b66a2"/>
+		<cli_parameters>
+			<data_type value="float"/>
+			<disable_fusing value="False"/>
+			<disable_gfusing value="False"/>
+			<disable_nhwc_to_nchw value="False"/>
+			<disable_resnet_optimization value="False"/>
+			<enable_concat_optimization value="False"/>
+			<extensions value="DIR"/>
+			<framework value="tf"/>
+			<generate_deprecated_IR_V2 value="False"/>
+			<input_model value="DIR/inception_v1_frozen.pb"/>
+			<input_model_is_text value="False"/>
+			<input_shape value="[1,224,224,3]"/>
+			<keep_shape_ops value="False"/>
+			<log_level value="ERROR"/>
+			<mean_scale_values value="[(array([1024., 1024., 1024.]), array([128., 128., 128.]))]"/>
+			<mean_values value="[1024,1024,1024]"/>
+			<move_to_preprocess value="False"/>
+			<output_dir value="DIR"/>
+			<placeholder_shapes value="[  1 224 224   3]"/>
+			<reverse_input_channels value="False"/>
+			<scale_values value="[128,128,128]"/>
+			<silent value="False"/>
+			<version value="False"/>
+			<unset unset_cli_parameters="batch, finegrain_fusing, freeze_placeholder_with_value, input, input_checkpoint, input_meta_graph, model_name, output, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_operation_patterns, tensorflow_subgraph_patterns, tensorflow_use_custom_operations_config"/>
+		</cli_parameters>
+	</meta_data>
+</net>
